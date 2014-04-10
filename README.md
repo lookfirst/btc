@@ -12,6 +12,7 @@ First time, run the scripts in this order:
 * apt.sh
 * install.sh
 * user.sh
+* REBOOT
 * su - btc && compile.sh
 
 Edit `conf/cgminer.conf` and specify your btc address and other settings
