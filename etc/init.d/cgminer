@@ -12,7 +12,7 @@
 ### END INIT INFO
 
 DESC="cgminer"
-DAEMON_USER=cgminer
+DAEMON_USER=btc
 DAEMON=/bin/sh
 DAEMON_ARGS=/opt/btc/etc/init.d/cgminer-start.sh
 PIDFILE=/var/run/cgminer.pid
