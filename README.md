@@ -1,5 +1,7 @@
 btc
 ===
+1KUeUSKN31bPZHvFQ4G9MYRo3VBSsRKR3m - This took many hours of research. Donations appreciated.
+
 This is intended as a minimal cgminer install on a raspberry pi. Minepeon is good and I borrowed a lot from that project, but I really don't want apache + php running and wasting memory/cpu time on my boxes. I also prefer the debian based system of wheezy.
 
 1. Stick latest [Raspbian OS](http://www.raspberrypi.org/downloads/) on a 2gb+ card ([ApplePi-Baker](http://www.tweaking4all.com/hardware/raspberry-pi/macosx-apple-pi-baker/) is easiest)
