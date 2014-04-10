@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /opt
-if [ -d "cgminer" ]; then
+if [ ! -d "cgminer" ]; then
 	git clone https://github.com/ckolivas/cgminer.git
 else
 	git pull origin master
