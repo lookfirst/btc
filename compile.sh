@@ -4,7 +4,7 @@ cd /opt
 if [ ! -d "cgminer" ]; then
 	git clone https://github.com/ckolivas/cgminer.git
 else
-	git pull origin master
+	( cd cgminer && git pull origin master )
 fi
 
 cd cgminer
