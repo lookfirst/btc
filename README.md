@@ -10,9 +10,9 @@ This is intended as a minimal cgminer install on a raspberry pi. Minepeon is goo
 First time, run the scripts in this order:
 
 * apt.sh
-* install.sh
 * user.sh
 * REBOOT
 * su - btc && compile.sh
+* install.sh
 
 Edit `conf/cgminer.conf` and specify your btc address and other settings
