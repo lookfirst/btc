@@ -11,6 +11,7 @@ First time, run the scripts in this order:
 
 * apt.sh
 * user.sh
+* system.sh
 * REBOOT
 * su - btc && compile.sh
 * install.sh
