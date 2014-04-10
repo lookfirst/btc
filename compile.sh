@@ -7,5 +7,6 @@ else
 	git pull origin master
 fi
 
+cd cgminer
 CFLAGS="-O2 -Wall" ./configure --enable-hashfast && make install
 sudo cp 01-cgminer.rules /etc/udev/rules.d/
