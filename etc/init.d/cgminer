@@ -1,0 +1,120 @@
+#!/bin/sh
+
+# pulled from https://raw.githubusercontent.com/nicokaiser/node-init/master/bin/init.sh
+
+### BEGIN INIT INFO
+# Provides:          cgminer
+# Required-Start:    $local_fs $remote_fs $network $syslog $mail-transport-agent
+# Required-Stop:     $local_fs $remote_fs $network $syslog $mail-transport-agent
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/stop cgminer
+### END INIT INFO
+
+DESC="cgminer"
+DAEMON_USER=cgminer
+DAEMON=/bin/sh
+DAEMON_ARGS=/opt/btc/etc/init.d/cgminer-start.sh
+PIDFILE=/var/run/cgminer.pid
+
+. /lib/init/vars.sh
+. /lib/lsb/init-functions
+
+do_start()
+{
+    # Wait to make sure network is there
+    sleep 1
+
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --chuid $DAEMON_USER --background --exec $DAEMON --test > /dev/null \
+      || { log_daemon_msg "already running"; return 1; }
+    start-stop-daemon --start --quiet --chuid $DAEMON_USER --make-pidfile --pidfile $PIDFILE --background --exec $DAEMON -- $DAEMON_ARGS \
+      || { log_daemon_msg "could not be started"; return 2; }
+    log_daemon_msg "started"
+}
+
+do_stop()
+{
+    start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --pidfile $PIDFILE --chuid $DAEMON_USER --exec $DAEMON
+    RETVAL="$?"
+    [ "$RETVAL" = 2 ] && return 2
+    start-stop-daemon --stop --quiet --oknodo --retry=0/3/KILL/5 --pidfile $PIDFILE --chuid $DAEMON_USER --exec $DAEMON -- $DAEMON_ARGS
+    [ "$?" = 2 ] && return 2
+    rm -f $PIDFILE
+    [ "$RETVAL" = 1 ] && log_daemon_msg "not running"
+    [ "$RETVAL" = 0 ] && log_daemon_msg "stopped"
+    return "$RETVAL"
+}
+
+do_status()
+{
+  RUNNING=$(running)
+  ispidactive=$(pidof $DAEMON | grep `cat $PIDFILE 2>&1` >/dev/null 2>&1)
+  ISPIDACTIVE=$?
+  if [ -n "$RUNNING" ]; then
+    if [ $ISPIDACTIVE ]; then
+      log_success_msg "$DESC is running"
+      exit 0
+    fi
+  else
+    if [ -f $PIDFILE ]; then
+      log_success_msg "$DESC is NOT running, phantom pidfile $PIDFILE"
+      exit 1
+    else
+      log_success_msg "$DESC is NOT running"
+      exit 3
+    fi
+  fi
+}
+
+running()
+{
+  RUNSTAT=$(start-stop-daemon --quiet --start --pidfile $PIDFILE --chuid $DAEMON_USER --background --exec $DAEMON --test > /dev/null)
+  if [ "$?" = 1 ]; then
+    echo y
+  fi
+}
+
+case "$1" in
+  start)
+    log_daemon_msg "Starting $DESC"
+    do_start
+    case "$?" in
+      0|1) log_end_msg 0 ;;
+      2) log_end_msg 1 ;;
+    esac
+    ;;
+  stop)
+    log_daemon_msg "Stopping $DESC"
+    do_stop
+    case "$?" in
+      0|1) log_end_msg 0 ;;
+      2) log_end_msg 1 ;;
+    esac
+    ;;
+  restart)
+    log_daemon_msg "Restarting $DESC"
+    do_stop
+    case "$?" in
+      0|1)
+        do_start
+        case "$?" in
+          0) log_end_msg 0 ;;
+          1) log_end_msg 1 ;; # Old process is still running
+          *) log_end_msg 1 ;; # Failed to start
+        esac
+        ;;
+      *)
+        log_end_msg 1
+        ;;
+    esac
+    ;;
+  status)
+    do_status
+    ;;
+  *)
+    echo "Usage: $0 (start|stop|restart|status)" >&2
+    exit 3
+    ;;
+esac
+
+exit 0

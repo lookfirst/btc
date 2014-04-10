@@ -1,0 +1,10 @@
+# gpu_mem_512=64
+# gpu_mem_256=64
+arm_freq=900
+core_freq=250
+sdram_freq=450
+over_voltage=2
+gpu_mem=16 
+cma_lwm=16
+cma_hwm=32
+cma_offline_start=16
