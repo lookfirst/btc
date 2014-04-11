@@ -1,6 +1,7 @@
 btc
 ===
-1KUeUSKN31bPZHvFQ4G9MYRo3VBSsRKR3m - This took many hours of research. Donations appreciated.
+
+`1KUeUSKN31bPZHvFQ4G9MYRo3VBSsRKR3m` - This took many hours of research. Donations appreciated.
 
 This is intended as a super minimal [cgminer](https://github.com/ckolivas/cgminer) install on a raspberry pi. Minepeon is good and I borrowed a lot from that project, but I really don't want apache + php running and wasting memory/cpu time on my pi's. I also prefer running debian based systems.
 
