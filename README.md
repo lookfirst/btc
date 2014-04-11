@@ -20,6 +20,4 @@ First time, run the scripts in this order:
 * compile.sh
 * install.sh
 
-Edit `conf/cgminer.conf` and specify your btc address and other settings, then reboot again. When things come back up again, cgminer should be running in a screen session under the `btc` user. You can attach to it by switching to that user `su - btc` and running `screen -x`.
-
-To get back to the console from the screen session: `CTRL-A D`
+Edit `conf/cgminer.conf` and specify your btc address and other settings, then reboot again. When things come back up again, cgminer should be running in a screen session under the `btc` user. You can attach to it by logging in as that user and running `screen -x`. To get back to the console from the screen session: `CTRL-A D`
