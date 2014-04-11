@@ -11,7 +11,7 @@ Another complaint I have of Minepeon is that it has a binary version of cgminer.
 3. `sudo -s`
 4. `cd /opt && git clone https://github.com/lookfirst/btc.git && cd btc`
 
-First time, run the scripts in this order:
+First time, run the scripts in the order below. All of the scripts are idempotent.
 
 * apt.sh
 * user.sh
