@@ -13,11 +13,11 @@ Another complaint I have of Minepeon is that it has a binary version of cgminer.
 
 First time, run the scripts in the order below. All of the scripts are idempotent. Edit `compile.sh` to set your miner for cgminer.
 
-1. apt.sh
-2. user.sh
-3. system.sh
+1. `apt.sh`
+2. `user.sh`
+3. `system.sh`
 4. REBOOT
-5. compile.sh
-6. install.sh
+5. `compile.sh`
+6. `install.sh`
 
 Edit `conf/cgminer.conf` and specify your btc address and other settings, then reboot again. When things come back up again, cgminer should be running in a screen session under the `btc` user. You can attach to it by logging in as that user and running `screen -x`. To get back to the console from the screen session: `CTRL-A D`
