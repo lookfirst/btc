@@ -9,4 +9,4 @@ fi
 
 cd cgminer && ./autogen.sh
 CFLAGS="-O2 -Wall" ./configure --enable-hashfast && make install
-sudo cp 01-cgminer.rules /etc/udev/rules.d/
+cp 01-cgminer.rules /etc/udev/rules.d/
